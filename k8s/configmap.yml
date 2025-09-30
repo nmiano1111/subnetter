@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: ipam-config
+  namespace: ipam
+data:
+  IPAM_APP_ENV: dev
