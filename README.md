@@ -10,7 +10,6 @@ It provides APIs for managing:
 
 A companion **Go CLI** (based on Cobra) is included to exercise the API.
 
----
 
 
 ## 🛠 Tech Stack
@@ -22,7 +21,6 @@ A companion **Go CLI** (based on Cobra) is included to exercise the API.
 - **Containerization**: Docker, Docker Compose  
 - **Kubernetes (local)**: [Kind](https://kind.sigs.k8s.io/) for cluster-based deployments  
 
----
 
 
 ## ✨ Features
@@ -35,17 +33,15 @@ A companion **Go CLI** (based on Cobra) is included to exercise the API.
 - Backed by PostgreSQL with async SQLAlchemy / SQLModel  
 - CLI for testing and demos  
 
----
 
 
 ## ☸️ Running Subnetter on Kubernetes with Kind
 
 This section covers how to run the Subnetter service inside a local [Kind](https://kind.sigs.k8s.io/) (Kubernetes in Docker) cluster.
 
----
-
 
 ### ⚙️ Setup
+
 
 #### 1. Create the Kind cluster (uses `kind.yaml` for cluster config):
 
@@ -72,6 +68,7 @@ make port-forward
 # → FastAPI available at http://localhost:8000/docs
 ```
 
+
 ### 🔍 Viewing Pods
 
 Check the status of the pods in the ipam namespace:
@@ -94,6 +91,7 @@ Forward port to access api:
 kubectl -n ipam port-forward svc/ipam-api 8000:8000
 ```
 
+
 ### 🛠 Helpful variations
 
 * All namespaces:
@@ -113,6 +111,7 @@ kubectl -n ipam port-forward svc/ipam-api 8000:8000
     kubectl logs -n ipam ipam-api-7c78f9dd8c-xgkns 
     ```
 
+
 ### 🧹 Cleanup 
 
 Delete the deployment and cluster when finished:
@@ -122,7 +121,6 @@ make k8s-delete
 make kind-delete
 ```
 
----
 
 
 ## 🐳 Running with Docker Compose
@@ -150,7 +148,6 @@ Swagger UI → http://localhost:8000/docs
 
 ReDoc → http://localhost:8000/redoc
 
----
 
 
 ## 💻 Go CLI
