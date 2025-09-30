@@ -1,4 +1,4 @@
-# Subnetter – IP Address Management Service
+# 🌐 Subnetter – IP Address Management Service
 
 Subnetter is a prototype **[IP Address Management (IPAM)](https://netboxlabs.com/docs/netbox/features/ipam/?utm_source=chatgpt.com)** service built with **[FastAPI](https://fastapi.tiangolo.com/)** and **[PostgreSQL](https://www.postgresql.org/)**.  
 It provides APIs for managing:
@@ -12,7 +12,20 @@ A companion **Go CLI** (based on Cobra) is included to exercise the API.
 
 ---
 
-## Features
+
+## 🛠 Tech Stack
+
+- **Backend**: [FastAPI](https://fastapi.tiangolo.com/) (Python 3.12)  
+- **Database**: [PostgreSQL](https://www.postgresql.org/)  
+- **ORM / Models**: [SQLModel](https://sqlmodel.tiangolo.com/) + SQLAlchemy  
+- **CLI**: [Go](https://go.dev/) with [Cobra](https://cobra.dev/)  
+- **Containerization**: Docker, Docker Compose  
+- **Kubernetes (local)**: [Kind](https://kind.sigs.k8s.io/) for cluster-based deployments  
+
+---
+
+
+## ✨ Features
 
 - Multi-tenant IPAM model  
 - Create, update, delete, list tenants, VRFs, prefixes, and IPs  
@@ -23,13 +36,16 @@ A companion **Go CLI** (based on Cobra) is included to exercise the API.
 - CLI for testing and demos  
 
 ---
-## Running Subnetter on Kubernetes with Kind
+
+
+## ☸️ Running Subnetter on Kubernetes with Kind
 
 This section covers how to run the Subnetter service inside a local [Kind](https://kind.sigs.k8s.io/) (Kubernetes in Docker) cluster.
 
 ---
 
-### Setup
+
+### ⚙️ Setup
 
 #### 1. Create the Kind cluster (uses `kind.yaml` for cluster config):
 
@@ -56,7 +72,7 @@ make port-forward
 # → FastAPI available at http://localhost:8000/docs
 ```
 
-### Viewing Pods
+### 🔍 Viewing Pods
 
 Check the status of the pods in the ipam namespace:
 
@@ -78,7 +94,7 @@ Forward port to access api:
 kubectl -n ipam port-forward svc/ipam-api 8000:8000
 ```
 
-### Helpful variations
+### 🛠 Helpful variations
 
 * All namespaces:
     ```bash
@@ -97,7 +113,7 @@ kubectl -n ipam port-forward svc/ipam-api 8000:8000
     kubectl logs -n ipam ipam-api-7c78f9dd8c-xgkns 
     ```
 
-### Cleanup 
+### 🧹 Cleanup 
 
 Delete the deployment and cluster when finished:
 
@@ -108,7 +124,8 @@ make kind-delete
 
 ---
 
-## Running with Docker Compose
+
+## 🐳 Running with Docker Compose
 
 ### 1. Create `.env`
 
@@ -125,7 +142,7 @@ This will start:
 * api: FastAPI app (http://localhost:8000)
 * db: PostgreSQL database
 
-### 3. API docs
+### 3. 📖 API docs
 
 Once running, you can explore the API at:
 
@@ -135,7 +152,8 @@ ReDoc → http://localhost:8000/redoc
 
 ---
 
-## Go CLI
+
+## 💻 Go CLI
 
 A [Cobra](https://cobra.dev/)-based CLI is included under cli/.
 
