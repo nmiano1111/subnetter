@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: ipam-config
-  namespace: ipam
+  name: subnetter-config
+  namespace: subnetter
 data:
   IPAM_APP_ENV: dev

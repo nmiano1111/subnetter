@@ -16,7 +16,7 @@ A companion **Go CLI** (based on Cobra) is included to exercise the API.
 
 - **Backend**: [FastAPI](https://fastapi.tiangolo.com/) (Python 3.12)  
 - **Database**: [PostgreSQL](https://www.postgresql.org/)  
-- **ORM / Models**: [SQLModel](https://sqlmodel.tiangolo.com/) + SQLAlchemy  
+- **ORM / Models**: [SQLModel](https://sqlmodel.tiangolo.com/) + [SQLAlchemy](https://www.sqlalchemy.org/)  
 - **CLI**: [Go](https://go.dev/) with [Cobra](https://cobra.dev/)  
 - **Containerization**: Docker, Docker Compose  
 - **Kubernetes (local)**: [Kind](https://kind.sigs.k8s.io/) for cluster-based deployments  
@@ -33,6 +33,77 @@ A companion **Go CLI** (based on Cobra) is included to exercise the API.
 - Backed by PostgreSQL with async SQLAlchemy / SQLModel  
 - CLI for testing and demos  
 
+
+
+## 🐳 Running with Docker Compose
+
+### 1. Create `.env`
+
+Create a file called .env in the project root (see .env.example)
+
+### 2. Start service
+
+```bash
+docker compose up --build
+```
+
+This will start:
+    
+* api: FastAPI app (http://localhost:8000)
+* db: PostgreSQL database
+
+### 3. 📖 API docs
+
+Once running, you can explore the API at:
+
+Swagger UI → http://localhost:8000/docs
+
+ReDoc → http://localhost:8000/redoc
+
+
+## 👁️ Observability: Prometheus & Grafana
+
+The `subnetter` service exposes runtime and application metrics in
+[Prometheus format](https://prometheus.io/docs/instrumenting/exposition_formats/) at
+[`/metrics`](http://localhost:8001/metrics).
+
+_*note: currently only configured to work with the docker-compose method of running the app*_
+
+## Running the observability stack
+
+Prometheus and Grafana are defined in a separate compose file:  
+`docker-compose.observability.yml`
+
+This allows you to run observability tools independently of the core application.
+
+Bring up the base stack (API + DB):
+
+```bash
+make app-up
+```
+
+Then start the observability stack:
+
+```bash
+make obs-up
+```
+
+### Services
+
+Prometheus → http://localhost:9090
+
+Grafana → http://localhost:3000
+ (login admin / admin by default)
+
+Prometheus is configured to scrape the API container on the internal Docker network:
+
+```yaml
+scrape_configs:
+  - job_name: "subnetter"
+    metrics_path: /metrics
+    static_configs:
+      - targets: ["api:8000"]
+```
 
 
 ## ☸️ Running Subnetter on Kubernetes with Kind
@@ -120,33 +191,6 @@ Delete the deployment and cluster when finished:
 make k8s-delete
 make kind-delete
 ```
-
-
-
-## 🐳 Running with Docker Compose
-
-### 1. Create `.env`
-
-Create a file called .env in the project root (see .env.example)
-
-### 2. Start service
-
-```bash
-docker compose up --build
-```
-
-This will start:
-    
-* api: FastAPI app (http://localhost:8000)
-* db: PostgreSQL database
-
-### 3. 📖 API docs
-
-Once running, you can explore the API at:
-
-Swagger UI → http://localhost:8000/docs
-
-ReDoc → http://localhost:8000/redoc
 
 
 

@@ -550,6 +550,20 @@ files = [
 ]
 
 [[package]]
+name = "prometheus-client"
+version = "0.23.1"
+description = "Python client for the Prometheus monitoring system."
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "prometheus_client-0.23.1-py3-none-any.whl", hash = "sha256:dd1913e6e76b59cfe44e7a4b83e01afc9873c1bdfd2ed8739f1e76aeca115f99"},
+    {file = "prometheus_client-0.23.1.tar.gz", hash = "sha256:6ae8f9081eaaaf153a2e959d2e6c4f4fb57b12ef76c8c7980202f1e57b48b2ce"},
+]
+
+[package.extras]
+twisted = ["twisted"]
+
+[[package]]
 name = "pydantic"
 version = "2.11.9"
 description = "Data validation using Python type hints"
@@ -1193,6 +1207,21 @@ typing-extensions = {version = ">=4.10.0", markers = "python_version < \"3.13\""
 full = ["httpx (>=0.27.0,<0.29.0)", "itsdangerous", "jinja2", "python-multipart (>=0.0.18)", "pyyaml"]
 
 [[package]]
+name = "starlette-exporter"
+version = "0.23.0"
+description = "Prometheus metrics exporter for Starlette applications."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "starlette_exporter-0.23.0-py3-none-any.whl", hash = "sha256:ea1a27f2aae48122931e2384a361a03e00261efbb4a665ce1ae2e46f29123d5e"},
+    {file = "starlette_exporter-0.23.0.tar.gz", hash = "sha256:f80998db2d4a3462808a9bce56950046b113d3fab6ec6c20cb6de4431d974969"},
+]
+
+[package.dependencies]
+prometheus-client = ">=0.12"
+starlette = ">=0.35"
+
+[[package]]
 name = "typer"
 version = "0.19.2"
 description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
@@ -1526,4 +1555,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "9b36c0dafb11590e36e69bc4a5c15b0617a611710e98cef0070a3ae9ffae66f2"
+content-hash = "fe6379c66bc0c6759733d3c28a9f8453f97c7acc18b5cbf14caadde71e4f813e"

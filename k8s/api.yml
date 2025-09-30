@@ -1,11 +1,11 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: ipam-api
-  namespace: ipam
+  name: subnetter-api
+  namespace: subnetter
 spec:
   selector:
-    app: ipam-api
+    app: subnetter-api
   ports:
   - name: http
     port: 8000
@@ -17,17 +17,17 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: ipam-api
-  namespace: ipam
+  name: subnetter-api
+  namespace: subnetter
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: ipam-api
+      app: subnetter-api
   template:
     metadata:
       labels:
-        app: ipam-api
+        app: subnetter-api
     spec:
       containers:
       - name: api
@@ -35,9 +35,9 @@ spec:
         imagePullPolicy: IfNotPresent
         envFrom:
         - configMapRef:
-            name: ipam-config
+            name: subnetter-config
         - secretRef:
-            name: ipam-secrets
+            name: subnetter-secrets
         ports:
         - containerPort: 8000
           name: http

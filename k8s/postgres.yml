@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: postgres
-  namespace: ipam
+  namespace: subnetter
 spec:
   type: ClusterIP
   selector:
@@ -16,7 +16,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: postgres-data
-  namespace: ipam
+  namespace: subnetter
 spec:
   accessModes: ["ReadWriteOnce"]
   resources:
@@ -27,7 +27,7 @@ apiVersion: apps/v1
 kind: StatefulSet
 metadata:
   name: postgres
-  namespace: ipam
+  namespace: subnetter
 spec:
   serviceName: postgres
   replicas: 1
@@ -47,7 +47,7 @@ spec:
           name: pg
         env:
         - name: POSTGRES_DB
-          value: ipam
+          value: subnetter
         - name: POSTGRES_USER
           value: postgres
         - name: POSTGRES_PASSWORD
@@ -57,7 +57,7 @@ spec:
           mountPath: /var/lib/postgresql/data
         readinessProbe:
           exec:
-            command: ["pg_isready","-U","postgres","-d","ipam"]
+            command: ["pg_isready","-U","postgres","-d","subnetter"]
           initialDelaySeconds: 5
           periodSeconds: 5
       volumes:
