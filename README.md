@@ -142,24 +142,24 @@ make port-forward
 
 ### 🔍 Viewing Pods
 
-Check the status of the pods in the ipam namespace:
+Check the status of the pods in the subnetter namespace:
 
 ```bash
-kubectl get pods -n ipam
+kubectl get pods -n subnetter
 ```
 
 Example output:
 
 ```bash
-NAME                          READY   STATUS    RESTARTS   AGE
-ipam-api-7c78f9dd8c-xgkns     1/1     Running   0          2m
-ipam-postgres-0               1/1     Running   0          2m
+NAME                               READY   STATUS    RESTARTS   AGE
+subnetter-api-7c78f9dd8c-xgkns     1/1     Running   0          2m
+postgres-0                         1/1     Running   0          2m
 ```
 
 Forward port to access api:
 
 ```bash
-kubectl -n ipam port-forward svc/ipam-api 8000:8000
+kubectl -n subnetter port-forward svc/subnetter-api 8000:8000
 ```
 
 
@@ -171,15 +171,15 @@ kubectl -n ipam port-forward svc/ipam-api 8000:8000
     ```
 * Watch pods continuously:
     ```bash
-    kubectl get pods -n ipam -w 
+    kubectl get pods -n subnetter -w 
     ```
 * Describe a pod:
     ```bash
-    kubectl describe pod ipam-api-7c78f9dd8c-xgkns -n ipam 
+    kubectl describe pod subnetter-api-7c78f9dd8c-xgkns -n subnetter 
     ```
 * Get logs
     ```bash
-    kubectl logs -n ipam ipam-api-7c78f9dd8c-xgkns 
+    kubectl logs -n subnetter subnetter-api-7c78f9dd8c-xgkns 
     ```
 
 
@@ -211,16 +211,16 @@ Example commands:
 
 ```bash
 # Create a tenant
-./subnetter tenant create --name DemoTenant
+./subnetter create-tenant --name DemoTenant
 
 # Create a VRF for that tenant
-./subnetter vrf create --tenant-id <tenant-uuid> --name DemoVRF
+./subnetter create-vrf --tenant-id <tenant-uuid> --name DemoVRF
 
 # Create a prefix
-./subnetter prefix create --vrf-id <vrf-uuid> --cidr 10.0.0.0/24
+./subnetter create-prefix --vrf-id <vrf-uuid> --cidr 10.0.0.0/24
 
 # Allocate the next free IP
-./subnetter ip allocate --prefix-id <prefix-uuid>
+./subnetter next-ip --prefix-id <prefix-uuid>
 
 # See `help` for more
 ./subnetter -help
