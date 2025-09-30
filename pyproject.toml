@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = ["nmiano1111 <nmiano84@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = {extras = ["standard"], version = "^0.117.1"}
+sqlalchemy = "^2.0.43"
+sqlmodel = "^0.0.25"
+greenlet = "^3.2.4"
+asyncpg = "^0.30.0"
+pydantic-settings = "^2.11.0"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
